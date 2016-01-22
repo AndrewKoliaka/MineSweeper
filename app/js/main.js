@@ -81,18 +81,8 @@ var battlefield = {
         
       
        
-    },
-    getNeighbors(i,j){
-        
-    },
-    open3x3(i,j){
-        for(var o = i - 1; o <= i + 1; o++){
-            for(var b = j - 1; b < j + 1; b++){
-                
-            }
-        }
-    } 
-}      
+    }
+}
 
 var view = {
     open : function(i , j, symbol) {

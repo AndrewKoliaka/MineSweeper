@@ -1,15 +1,22 @@
 {
-  "name": "mineSweeper",
+  "name": "MineSweeper",
   "version": "0.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "js mineSweeper",
+  "main": "gulpfile.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/AndrewKoliaka/MineSweeper.git"
+  },
   "author": "",
   "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AndrewKoliaka/MineSweeper/issues"
+  },
   "devDependencies": {
-    "browser-sync": "^2.11.0",
+    "browser-sync": "^2.11.1",
     "gulp": "^3.9.0"
   }
 }
