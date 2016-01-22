@@ -4,20 +4,59 @@
     <meta charset="UTF-8">
     <title>mineSweeper</title>
     <style>
-        canvas{
+        #game{
             position: absolute;
+            width: 240px;
+            height: 280px;
             top: 0;
             left: 0;
             right: 0;
             bottom: 0;
             margin: auto;
-            border: thin solid black;
         }
+
+        #game canvas {
+            position: relative;
+            border: thin solid black;
+            cursor: pointer;
+        }
+
+        #game #dashboard {
+            position: relative;
+            margin: auto;
+            /*margin-bottom: 0;*/
+            width: 240px;
+            display: inline-flex;
+        }
+        #game #dashboard #resBut {
+            cursor: pointer;
+            height: 40px;
+            width: 60px;
+            margin-bottom: 5px;
+        }
+
+        #resBut, #state, form{
+            margin: auto;
+        }
+
     </style>
 </head>
 <body>
-    <h1>mineSweeper</h1>
-    <canvas width="240" height="240"></canvas>
-    <script src="js/main.js"></script>
+<h1>mineSweeper</h1>
+
+<div id="game">
+    <div id="dashboard">
+        <span id="state">
+            <span id="numBombs">bombs: <span></span></span><br>
+            <span id="foundBmb">found: <span>0</span></span>
+        </span>
+        <button id="resBut" onclick="restart()">Restart</button>
+        <form action="#">
+            <img src="src/flag.png" /></canvas><input id="flagCh" type="checkbox"/>
+        </form>
+    </div>
+    <canvas id="myCanvas" width="240" height="240"></canvas>
+</div>
+<script src="js/main.js"></script>
 </body>
 </html>
