@@ -3,11 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <title>mineSweeper</title>
+    <link rel='shortcut icon' href='favicon.ico' type='image/x-icon'>
     <style>
-        #game{
+        #game {
             position: absolute;
-            width: 240px;
-            height: 280px;
             top: 0;
             left: 0;
             right: 0;
@@ -15,47 +14,48 @@
             margin: auto;
         }
 
-        #game canvas {
-            position: relative;
+        #myCanvas {
             border: thin solid black;
             cursor: pointer;
         }
 
-        #game #dashboard {
-            position: relative;
-            margin: auto;
-            /*margin-bottom: 0;*/
+        #dashboard {
             width: 240px;
             display: inline-flex;
         }
-        #game #dashboard #resBut {
+
+        #resBut {
             cursor: pointer;
             height: 40px;
-            width: 60px;
+            width: 70px;
             margin-bottom: 5px;
         }
 
-        #resBut, #state, form{
+        #foundBmb, #numBombs {
             margin: auto;
         }
 
+        #difficulty {
+            display: inline-flex;
+        }
     </style>
 </head>
 <body>
 <h1>mineSweeper</h1>
 
+<div id="difficulty">
+    <label for="level">begginer<input type="radio" name="level" value="first" class="level" checked/>
+        <label for="level">Intermediate<input type="radio" value="second" class="level" name="level"/>
+            <label for="level">expert<input type="radio" value="third" class="level" name="level"/>
+</div>
 <div id="game">
+
     <div id="dashboard">
-        <span id="state">
-            <span id="numBombs">bombs: <span></span></span><br>
-            <span id="foundBmb">found: <span>0</span></span>
-        </span>
-        <button id="resBut" onclick="restart()">Restart</button>
-        <form action="#">
-            <img src="src/flag.png" /></canvas><input id="flagCh" type="checkbox"/>
-        </form>
+        <span id="numBombs">bombs: <span></span></span>
+        <button id="resBut">Restart</button>
+        <span id="foundBmb">found: <span>0</span></span>
     </div>
-    <canvas id="myCanvas" width="240" height="240"></canvas>
+    <canvas id="myCanvas" oncontextmenu="return false"></canvas>
 </div>
 <script src="js/main.js"></script>
 </body>
