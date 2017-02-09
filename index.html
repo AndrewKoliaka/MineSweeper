@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>minesweeper</title>
+    <link rel="stylesheet" href="dist/styles.css">
+</head>
+
+<body>
+    <div id="game_info">
+        <h1>minesweeper</h1>
+        <div id="difficulty">
+            <label for="level">begginer</label>
+            <input type="radio" name="level" value="first" class="level" checked />
+            <label for="level">Intermediate</label>
+            <input type="radio" value="second" class="level" name="level" />
+            <label for="level">expert</label>
+            <input type="radio" value="third" class="level" name="level" />
+        </div>
+        <div id="instructions">
+            <h3 align="center">Instructions</h3>
+            <ul>
+                <li>Left mouse button - open square</li>
+                <li>Right mouse button - mark square</li>
+            </ul>
+        </div>
+    </div>
+    <div id="game">
+        <div id="dashboard">
+            <span id="numBombs">bombs: <span></span></span>
+            <button id="resBut">Restart</button>
+            <span id="foundBmb">found: <span>0</span></span>
+        </div>
+        <canvas id="myCanvas" oncontextmenu="return false"></canvas>
+    </div>
+    <script src="dist/app.js"></script>
+</body>
+
+</html>

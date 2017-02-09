@@ -13,23 +13,29 @@ function init() {
     canvas.addEventListener('contextmenu', cellClicked, false);
     document.getElementById('resBut').addEventListener('click', restart, false);
     var radios = document.getElementsByClassName('level');
-    for(var i = 0; i  < radios.length; i++){
+    for (var i = 0; i < radios.length; i++) {
         radios[i].addEventListener('change', difficultChanged, false);
     }
     restart();
 }
 
-function difficultChanged(){
-    switch (this.value){
-        case 'first': ROWS = 8;
-                      COLS = 8;
-                        battlefield.numMines = 10;break;
-        case 'second': ROWS = 16;
+function difficultChanged() {
+    switch (this.value) {
+        case 'first':
+            ROWS = 8;
+            COLS = 8;
+            battlefield.numMines = 10;
+            break;
+        case 'second':
+            ROWS = 16;
             COLS = 16;
-            battlefield.numMines = 40;break;
-        case 'third': ROWS = 30;
+            battlefield.numMines = 40;
+            break;
+        case 'third':
+            ROWS = 30;
             COLS = 16;
-            battlefield.numMines = 99;break;
+            battlefield.numMines = 99;
+            break;
     }
     restart();
 }
@@ -55,7 +61,7 @@ function restart() {
 var flags = {
     _flags: [],
     foundBombs: 0,
-    setFlag: function (i, j) {
+    setFlag: function(i, j) {
         var value = battlefield.getCell(i, j);
         if (value === 'v') {
             return;
@@ -74,8 +80,8 @@ var flags = {
             this.removeFlag(i, j);
         }
     },
-    removeFlag: function (i, j) {
-        this._flags.forEach(function (el, indx, arr) {
+    removeFlag: function(i, j) {
+        this._flags.forEach(function(el, indx, arr) {
             if (el.i === i && el.j === j) {
                 battlefield.setCell(i, j, el.value);
                 view.clearRect(j * CELL_SIZE + 1, i * CELL_SIZE + 1, CELL_SIZE - 2, CELL_SIZE - 2);
@@ -89,7 +95,7 @@ var flags = {
 var battlefield = {
     _playground: [],
     numMines: 10,
-    fill: function () {
+    fill: function() {
         for (var i = 0; i < COLS; i++) {
             this._playground[i] = [];
             for (var j = 0; j < ROWS; j++) {
@@ -97,13 +103,13 @@ var battlefield = {
             }
         }
     },
-    getCell: function (i, j) {
+    getCell: function(i, j) {
         return this._playground[i][j];
     },
-    setCell: function (i, j, value) {
+    setCell: function(i, j, value) {
         this._playground[i][j] = value;
     },
-    setBombs: function () {
+    setBombs: function() {
         var bombs = 0,
             randI, randJ;
         while (bombs < this.numMines) {
@@ -115,7 +121,7 @@ var battlefield = {
             }
         }
     },
-    setHints: function () {
+    setHints: function() {
         var bombcounter = 0;
         for (var i = 0; i < COLS; i++) {
             for (var j = 0; j < ROWS; j++) {
@@ -137,23 +143,13 @@ var battlefield = {
             }
         }
     },
-    showArray: function () {
-        var arr = '';
-        for (var i = 0; i < COLS; i++) {
-            for (var j = 0; j < ROWS; j++) {
-                arr += " " + this.getCell(i, j);
-            }
-            arr += '\n';
-        }
-        console.log(arr);
-    },
-    verify: function (i, j) {
+    verify: function(i, j) {
         var i1, j1,
             self = this,
             value = this.getCell(i, j);
         if (!value) {
             view.open(i, j, value);
-            this.coordForCheck.forEach(function (el) {
+            this.coordForCheck.forEach(function(el) {
                 if (i + el[0] >= 0 && i + el[0] <= COLS - 1 && j + el[1] >= 0 && j + el[1] <= ROWS - 1) {
                     i1 = i + el[0];
                     j1 = j + el[1];
@@ -183,15 +179,15 @@ var battlefield = {
         [1, 1]
     ],
     _gameFinished: false,
-    gameOver: function () {
-        this._playground.forEach(function (el, indx) {
+    gameOver: function() {
+        this._playground.forEach(function(el, indx) {
             for (var subIndx = 0; subIndx < ROWS; subIndx++) {
                 if (el[subIndx] === '*') {
                     view.open(indx, subIndx, '*');
                 }
             }
         });
-        flags._flags.forEach(function (el) {
+        flags._flags.forEach(function(el) {
             if (el.value === '*') {
                 view.open(el.i, el.j, el.value);
             }
@@ -199,7 +195,7 @@ var battlefield = {
         canvas.style.cursor = 'not-allowed';
         this._gameFinished = true;
     },
-    checkWin: function () {
+    checkWin: function() {
         var viwed = 0,
             flaged = 0;
         for (var i = 0; i < COLS; i++) {
@@ -215,31 +211,31 @@ var battlefield = {
             }
         }
         if (viwed + flaged === ROWS * COLS) {
-            alert('player win!!!');
             this._gameFinished = true;
             canvas.style.cursor = 'not-allowed';
+            setTimeout(function() { alert('you win!!!') }, 10);
         }
     }
 };
 
 var view = {
-    open: function (i, j, symbol) {
+    open: function(i, j, symbol) {
         if (battlefield.getCell(i, j) === 'v') {
             return;
         }
         switch (symbol) {
-            case 0 :
+            case 0:
                 ctx.fillStyle = '#C7DCED';
                 ctx.fillRect(j * CELL_SIZE + 1, i * CELL_SIZE + 1, CELL_SIZE - 2, CELL_SIZE - 2);
                 break;
-            case '*' :
+            case '*':
                 ctx.fillStyle = '#fdafa1';
                 ctx.fillRect(j * CELL_SIZE + 1, i * CELL_SIZE + 1, CELL_SIZE - 2, CELL_SIZE - 2);
                 ctx.fillStyle = 'black';
                 ctx.font = '40px Arial';
                 ctx.fillText(symbol, j * CELL_SIZE + CELL_SIZE / 5 - 1, i * CELL_SIZE + CELL_SIZE + CELL_SIZE / 5);
                 break;
-            default :
+            default:
                 ctx.fillStyle = '#ece3b0';
                 ctx.fillRect(j * CELL_SIZE + 1, i * CELL_SIZE + 1, CELL_SIZE - 2, CELL_SIZE - 2);
                 ctx.fillStyle = 'black';
@@ -249,7 +245,7 @@ var view = {
         battlefield.setCell(i, j, 'v');
 
     },
-    drawCanvas: function () {
+    drawCanvas: function() {
         ctx.beginPath();
 
         for (var i = 0; i < COLS; i++) {
@@ -260,7 +256,7 @@ var view = {
         ctx.stroke();
 
     },
-    drawFlag: function (i, j) {
+    drawFlag: function(i, j) {
         ctx.fillStyle = 'red';
         ctx.fillRect(j * CELL_SIZE + 7, i * CELL_SIZE + 5, 12, 12);
         ctx.fillStyle = 'black';
@@ -268,7 +264,7 @@ var view = {
         ctx.fillRect(j * CELL_SIZE + 5 + 5, i * CELL_SIZE + 5 + 18, 16, 3);
 
     },
-    clearRect: function (x, y, width, height) {
+    clearRect: function(x, y, width, height) {
         ctx.fillStyle = 'white';
         ctx.fillRect(x, y, width, height);
     }

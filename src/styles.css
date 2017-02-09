@@ -1,0 +1,49 @@
+body {
+    position: absolute;
+    width: 100%;
+}
+
+#game {
+    position: relative;
+    text-align: center;
+    margin: auto;
+}
+
+#game_info {
+    position: relative;
+    text-align: center;
+    width: 340px;
+    margin-right: auto;
+    margin-left: auto;
+    margin-bottom: 20px;
+}
+
+#instructions {
+    padding-left: 30px;
+    text-align: left;
+}
+
+#myCanvas {
+    cursor: pointer;
+}
+
+#dashboard {
+    width: 240px;
+    display: inline-flex;
+}
+
+#resBut {
+    cursor: pointer;
+    height: 40px;
+    width: 70px;
+    margin-bottom: 5px;
+}
+
+#foundBmb,
+#numBombs {
+    margin: auto;
+}
+
+#difficulty {
+    display: inline-block;
+}
