@@ -1,6 +1,6 @@
 'use strict';
-var ROWS = 8,
-    COLS = 8,
+var rows = 8,
+    cols = 8,
     CELL_SIZE = 30;
 
 var canvas = document.getElementById('myCanvas'),
@@ -22,18 +22,18 @@ function init() {
 function difficultChanged() {
     switch (this.value) {
         case 'first':
-            ROWS = 8;
-            COLS = 8;
+            rows = 8;
+            cols = 8;
             battlefield.numMines = 10;
             break;
         case 'second':
-            ROWS = 16;
-            COLS = 16;
+            rows = 16;
+            cols = 16;
             battlefield.numMines = 40;
             break;
         case 'third':
-            ROWS = 30;
-            COLS = 16;
+            rows = 30;
+            cols = 16;
             battlefield.numMines = 99;
             break;
     }
@@ -41,8 +41,8 @@ function difficultChanged() {
 }
 
 function restart() {
-    canvas.width = ROWS * CELL_SIZE;
-    canvas.height = COLS * CELL_SIZE;
+    canvas.width = rows * CELL_SIZE;
+    canvas.height = cols * CELL_SIZE;
     battlefield._gameFinished = false;
     document.getElementById('game').style.width = canvas.width + "px";
     document.getElementById('game').style.height = canvas.height + 40 + "px";
@@ -96,9 +96,9 @@ var battlefield = {
     _playground: [],
     numMines: 10,
     fill: function() {
-        for (var i = 0; i < COLS; i++) {
+        for (var i = 0; i < cols; i++) {
             this._playground[i] = [];
-            for (var j = 0; j < ROWS; j++) {
+            for (var j = 0; j < rows; j++) {
                 this.setCell(i, j, 0);
             }
         }
@@ -113,8 +113,8 @@ var battlefield = {
         var bombs = 0,
             randI, randJ;
         while (bombs < this.numMines) {
-            randI = Math.floor(Math.random() * COLS);
-            randJ = Math.floor(Math.random() * ROWS);
+            randI = Math.floor(Math.random() * cols);
+            randJ = Math.floor(Math.random() * rows);
             if (!this.getCell(randI, randJ)) {
                 this.setCell(randI, randJ, '*');
                 bombs++;
@@ -123,14 +123,14 @@ var battlefield = {
     },
     setHints: function() {
         var bombcounter = 0;
-        for (var i = 0; i < COLS; i++) {
-            for (var j = 0; j < ROWS; j++) {
+        for (var i = 0; i < cols; i++) {
+            for (var j = 0; j < rows; j++) {
                 if (this.getCell(i, j) === '*') {
                     continue;
                 }
                 for (var c = 1; c > -2; c--) {
                     for (var r = 1; r > -2; r--) {
-                        if (i - c < 0 || j - r < 0 || i - c > COLS - 1 || j - r > ROWS - 1) {
+                        if (i - c < 0 || j - r < 0 || i - c > cols - 1 || j - r > rows - 1) {
                             continue;
                         }
                         if (this.getCell(i - c, j - r) === '*') {
@@ -150,7 +150,7 @@ var battlefield = {
         if (!value) {
             view.open(i, j, value);
             this.coordForCheck.forEach(function(el) {
-                if (i + el[0] >= 0 && i + el[0] <= COLS - 1 && j + el[1] >= 0 && j + el[1] <= ROWS - 1) {
+                if (i + el[0] >= 0 && i + el[0] <= cols - 1 && j + el[1] >= 0 && j + el[1] <= rows - 1) {
                     i1 = i + el[0];
                     j1 = j + el[1];
 
@@ -181,7 +181,7 @@ var battlefield = {
     _gameFinished: false,
     gameOver: function() {
         this._playground.forEach(function(el, indx) {
-            for (var subIndx = 0; subIndx < ROWS; subIndx++) {
+            for (var subIndx = 0; subIndx < rows; subIndx++) {
                 if (el[subIndx] === '*') {
                     view.open(indx, subIndx, '*');
                 }
@@ -198,19 +198,16 @@ var battlefield = {
     checkWin: function() {
         var viwed = 0,
             flaged = 0;
-        for (var i = 0; i < COLS; i++) {
-            for (var j = 0; j < ROWS; j++) {
-                switch (this.getCell(i, j)) {
-                    case 'v':
-                        viwed++;
-                        break;
-                    case 'f':
-                        flaged++;
-                        break;
+        for (var i = 0; i < cols; i++) {
+            for (var j = 0; j < rows; j++) {
+                if (this.getCell(i, j) === 'v') {
+                    viwed++;
+                } else if (this.getCell(i, j) === 'f') {
+                    flaged++
                 }
             }
         }
-        if (viwed + flaged === ROWS * COLS) {
+        if (viwed + flaged === rows * cols) {
             this._gameFinished = true;
             canvas.style.cursor = 'not-allowed';
             setTimeout(function() { alert('you win!!!') }, 10);
@@ -248,8 +245,8 @@ var view = {
     drawCanvas: function() {
         ctx.beginPath();
 
-        for (var i = 0; i < COLS; i++) {
-            for (var j = 0; j < ROWS; j++) {
+        for (var i = 0; i < cols; i++) {
+            for (var j = 0; j < rows; j++) {
                 ctx.strokeRect(j * CELL_SIZE, i * CELL_SIZE, CELL_SIZE, CELL_SIZE);
             }
         }
@@ -278,7 +275,7 @@ function cellClicked(e) {
     var i = Math.floor(e.offsetY / CELL_SIZE),
         j = Math.floor(e.offsetX / CELL_SIZE);
 
-    if (i > COLS - 1 || j > ROWS - 1) {
+    if (i > cols - 1 || j > rows - 1) {
         return;
     }
 
