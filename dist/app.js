@@ -3,14 +3,16 @@ var rows = 8,
     cols = 8,
     CELL_SIZE = 30;
 
-var canvas = document.getElementsByTagName('canvas')[0];
-var ctx = canvas.getContext('2d');
+var canvas, ctx;
 
 window.addEventListener('load', init, false);
 
 function init() {
+    canvas = document.getElementsByTagName('canvas')[0];
     canvas.addEventListener('click', cellClicked, false);
     canvas.addEventListener('contextmenu', cellClicked, false);
+    document.getElementById('game').appendChild(canvas);
+    ctx = canvas.getContext('2d');
     document.getElementById('resBut').addEventListener('click', restart, false);
     var radios = document.getElementsByClassName('level');
     for (var i = 0; i < radios.length; i++) {
@@ -116,6 +118,7 @@ var flags = {
 var battlefield = {
     _playground: [],
     numMines: 10,
+    _gameFinished: false,
     fill: function() {
         for (var i = 0; i < cols; i++) {
             this._playground[i] = [];
@@ -199,7 +202,6 @@ var battlefield = {
         [1, 0],
         [1, 1]
     ],
-    _gameFinished: false,
     gameOver: function() {
         this._playground.forEach(function(el, indx) {
             for (var subIndx = 0; subIndx < rows; subIndx++) {
@@ -228,7 +230,7 @@ var battlefield = {
                 }
             }
         }
-        if (viwed + flaged === rows * cols) {
+        if (flaged === this.numMines && viwed + flaged === rows * cols) {
             this._gameFinished = true;
             canvas.style.cursor = 'not-allowed';
             setTimeout(function() { alert('you win!!!') }, 10);
