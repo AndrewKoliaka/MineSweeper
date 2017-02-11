@@ -1,25 +1,29 @@
 {
-    "name": "MineSweeper",
-    "version": "0.0.0",
-    "description": "js mineSweeper",
-    "main": "gulpfile.js",
-    "scripts": {
-        "test": "echo \"Error: no test specified\" && exit 1"
-    },
-    "repository": {
-        "type": "git",
-        "url": "https://github.com/AndrewKoliaka/MineSweeper.git"
-    },
-    "author": "",
-    "license": "ISC",
-    "bugs": {
-        "url": "https://github.com/AndrewKoliaka/MineSweeper/issues"
-    },
-    "devDependencies": {
-        "browser-sync": "^2.11.1",
-        "del": "^2.2.2",
-        "gulp": "^3.9.0",
-        "gulp-concat": "^2.6.1",
-        "gulp-useref": "^3.1.2"
-    }
+  "name": "MineSweeper",
+  "version": "0.0.0",
+  "description": "js mineSweeper",
+  "main": "gulpfile.js",
+  "scripts": {
+    "karma": "karma start"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/AndrewKoliaka/MineSweeper.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AndrewKoliaka/MineSweeper/issues"
+  },
+  "devDependencies": {
+    "browser-sync": "^2.11.1",
+    "del": "^2.2.2",
+    "gulp": "^3.9.0",
+    "gulp-concat": "^2.6.1",
+    "gulp-useref": "^3.1.2",
+    "jasmine-core": "^2.5.2",
+    "karma": "^1.4.1",
+    "karma-chrome-launcher": "^2.0.0",
+    "karma-jasmine": "^1.1.0"
+  }
 }
